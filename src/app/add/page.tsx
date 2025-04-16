@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { addVideoAction } from './action';
-import { AddSuccessToast } from './AddSuccessToast';
+import AddSuccessToastWithSuspense from './AddSuccessToast';
 
 export default function AddVideoPage() {
   return (
     <section className="py-10 max-w-xl mx-auto">
-      <AddSuccessToast />
+      <AddSuccessToastWithSuspense />
       <h1 className="text-3xl font-bold mb-6">Add a Video Summary</h1>
       <form action={addVideoAction} className="space-y-6">
         <div>

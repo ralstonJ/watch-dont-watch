@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 
 const PAGE_SIZE = 10;
 
-type SearchParams = { q?: string; page?: string };
+type SearchParams = Promise<{ q?: string; page?: string }>;
 
 function filterVideos(videos: VideoEntry[], q: string): VideoEntry[] {
   if (!q) return videos;
@@ -20,8 +20,9 @@ export default async function VideosPage({
 }: {
   searchParams: SearchParams;
 }) {
-  const q = typeof searchParams?.q === 'string' ? searchParams.q : '';
-  const page = Math.max(1, parseInt(searchParams?.page || '1', 10));
+  const params = await searchParams;
+  const q = params.q || '';
+  const page = Math.max(1, parseInt(params.page || '1', 10));
   const allVideos = await getAllVideos();
   const filtered = filterVideos(allVideos, q);
   const total = filtered.length;

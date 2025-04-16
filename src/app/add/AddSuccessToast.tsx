@@ -1,6 +1,6 @@
 'use client';
 import { Toaster, toast } from 'sonner';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 export function AddSuccessToast() {
@@ -11,4 +11,12 @@ export function AddSuccessToast() {
     }
   }, [searchParams]);
   return <Toaster />;
+}
+
+export default function AddSuccessToastWithSuspense() {
+  return (
+    <Suspense fallback={null}>
+      <AddSuccessToast />
+    </Suspense>
+  );
 }
